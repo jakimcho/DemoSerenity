@@ -1,11 +1,13 @@
 package com.qualityhouse.serenity.steps.definitions;
 
 import com.qualityhouse.serenity.entities.User;
+import com.qualityhouse.serenity.page_objects.HomePage;
 import com.qualityhouse.serenity.page_objects.LoginPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class LoginStepsDefinitions
 {
 
     LoginPage loginPage;
+    HomePage homePage;
 
     @Given( "^(?:.*) is on the login page$" )
     public void loginPageIsOpen()
@@ -54,7 +57,7 @@ public class LoginStepsDefinitions
         throw new PendingException();
     }
 
-    @When( "^John logs in with:$" )
+    @When( "^(?:.*) logs in with:$" )
     public void johnLogsInWith( List<User> data )
     {
         User u1 = data.get( 0 );
@@ -63,11 +66,10 @@ public class LoginStepsDefinitions
         loginPage.clickLoginButton();
     }
 
-    @Then( "^John should login successfully$" )
-    public void johnShouldLoginSuccessfully() throws Throwable
+    @Then( "^(.*) logs in is successfully$" )
+    public void userShouldLoginSuccessfully( String userName)
     {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        Assert.assertTrue( homePage.isSignOutMenuDisplayed() );
+        Assert.assertTrue( homePage.getLoggedInUserName().contains(userName.toLowerCase()) );
     }
-
 }

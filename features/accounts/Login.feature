@@ -7,7 +7,7 @@ Feature: Login
     Given John is on the login page
 
   Scenario: Successful Imperative Login
-    When I enter "johngo" in username field
+    When I enter "johngo@fsdfs.coy" in username field
     And I enter "password123" in password field
     And I click on login submit button
     Then I should lend on my home page
@@ -15,7 +15,6 @@ Feature: Login
 
   Scenario: Successful Declarative Login
     When John logs in with:
-      | username | password   |
-      | johngo   | password13 |
-      | johngo   | password23 |
-    Then John should login successfully
+      | username         | password   |
+      | johngo@fsdfs.coy | password13 |
+    Then Johngo logs in is successfully

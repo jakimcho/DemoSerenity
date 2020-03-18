@@ -6,8 +6,6 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 
-import java.time.Duration;
-
 /**
  * @author yakimfb
  * @since 12.03.20
@@ -43,7 +41,7 @@ public class LoginPage
 
     public void clickLoginButton()
     {
-        passwordField.waitUntilClickable()
-                     .click();
+        loginButton.waitUntilClickable()
+                   .click();
     }
 }
