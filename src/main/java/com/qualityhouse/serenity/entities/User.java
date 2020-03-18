@@ -8,6 +8,11 @@ public class User
 {
     private String username;
     private String password;
+    private String email;
+    private String title;
+    private String firstName;
+    private String lastName;
+    private String dataOfBirth;
 
     public String getUsername()
     {
@@ -27,5 +32,55 @@ public class User
     public void setPassword( String password )
     {
         this.password = password;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail( String email )
+    {
+        this.email = email;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle( String title )
+    {
+        this.title = title;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName( String firstName )
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName( String lastName )
+    {
+        this.lastName = lastName;
+    }
+
+    public String getDataOfBirth()
+    {
+        return dataOfBirth;
+    }
+
+    public void setDataOfBirth( String dataOfBirth )
+    {
+        this.dataOfBirth = dataOfBirth;
     }
 }

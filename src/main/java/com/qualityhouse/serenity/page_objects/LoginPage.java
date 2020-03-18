@@ -27,6 +27,12 @@ public class LoginPage
     @FindBy( name = "SubmitLogin" )
     private WebElementFacade loginButton;
 
+    @FindBy( name = "email_create" )
+    private WebElementFacade registrationMailField;
+
+    @FindBy( name = "SubmitCreate" )
+    private WebElementFacade createAnAccountButton;
+
     public void enterUserName( String email )
     {
         emailField.waitUntilEnabled()
@@ -43,5 +49,12 @@ public class LoginPage
     {
         loginButton.waitUntilClickable()
                    .click();
+    }
+
+    public void startRegistrationWithEmail( String email )
+    {
+        registrationMailField.type( email );
+        createAnAccountButton.waitUntilClickable()
+                             .click();
     }
 }
