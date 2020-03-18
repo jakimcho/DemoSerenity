@@ -3,6 +3,7 @@
 
 Feature: Account Registration
 
+  @debug
   Scenario: Successful Registration
     Given John is on the login page
     And he has started an account registration with "jhondsnow@south.go" email

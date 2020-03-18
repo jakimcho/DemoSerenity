@@ -1,10 +1,16 @@
 package com.qualityhouse.serenity.page_objects;
 
 import com.qualityhouse.serenity.entities.User;
+import com.qualityhouse.serenity.utils.MonthsEnum;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.By;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.qualityhouse.serenity.utils.Months.getMonths;
 
 /**
  * @author yakimfb
@@ -13,9 +19,6 @@ import org.openqa.selenium.support.ui.Select;
 public class RegistrationPage
         extends PageObject
 {
-
-    private WebElementFacade userTitleRadioButtons;
-
     @FindBy( id = "id_gender1" )
     private WebElementFacade mrRadioButton;
 
@@ -34,37 +37,65 @@ public class RegistrationPage
     @FindBy( name = "passwd" )
     private WebElementFacade passwordField;
 
-    @FindBy( name = "days" )
-    private WebElementFacade dayOfBirthDropDown;
+    private static final By DAY_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "days" );
 
-    @FindBy( name = "months" )
-    private WebElementFacade monthOfBirthDropDown;
+    private static final By MONTH_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "months" );
 
-    @FindBy( name = "years" )
-    private WebElementFacade yearOfBirthDropDown;
-
+    private static final By YEAR_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "years" );
 
     public void enterUserPersonalDetails( User user )
     {
-        if ( user.getTitle()
-                 .equalsIgnoreCase( "mr" ) )
-        {
-            mrRadioButton.click();
-        } else
-        {
-            mrsRadioButton.click();
-        }
+        selectGender( user.getTitle() );
 
-        firstNameField.type( user.getFirstName() );
-        lastNameField.type( user.getLastName() );
-        emailField.type( user.getEmail() );
-        passwordField.type( user.getPassword() );
+        fillFiledWithData( firstNameField,
+                           user.getFirstName() );
+        fillFiledWithData( lastNameField,
+                           user.getLastName() );
+        fillFiledWithData( emailField,
+                           user.getEmail() );
+        fillFiledWithData( passwordField,
+                           user.getPassword() );
 
-        dayOfBirthDropDown.selectByValue( user.getDataOfBirth()
-                                              .split( "-" )[0] );
-        monthOfBirthDropDown.selectByValue( user.getDataOfBirth()
-                                                .split( "-" )[1] );
-        yearOfBirthDropDown.selectByValue( user.getDataOfBirth()
-                                               .split( "-" )[2] );
+        enterBirthDate( user.getDataOfBirth() );
     }
+
+    private void selectGender( String gender )
+    {
+        if ( gender != null )
+        {
+            if ( gender.toLowerCase()
+                       .contains( "mrs" ) )
+            {
+                mrsRadioButton.click();
+            } else
+            {
+                mrRadioButton.click();
+            }
+        }
+    }
+
+    private void fillFiledWithData( WebElementFacade fieldElement,
+                                    String data )
+    {
+        if ( data != null )
+        {
+            fieldElement.waitUntilEnabled()
+                        .type( data );
+        }
+    }
+
+    private void enterBirthDate( String dataOfBirth )
+    {
+        if ( dataOfBirth != null )
+        {
+            String[] tokenizedDateOfBirth = dataOfBirth
+                    .split( "-" );
+            String monthValue = MonthsEnum.valueOf( tokenizedDateOfBirth[1].toUpperCase() )
+                                          .getValue();
+            find( DAY_OF_BIRTH_DROP_DOWN_LOCATOR ).selectByValue( tokenizedDateOfBirth[0] );
+            find( MONTH_OF_BIRTH_DROP_DOWN_LOCATOR ).selectByValue( monthValue );
+            find( YEAR_OF_BIRTH_DROP_DOWN_LOCATOR ).selectByValue( tokenizedDateOfBirth[2] );
+        }
+    }
+
 }
