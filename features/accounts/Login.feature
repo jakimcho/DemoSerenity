@@ -17,4 +17,4 @@ Feature: Login
     When John logs in with:
       | username         | password   |
       | johngo@fsdfs.coy | password13 |
-    Then Johngo logs in is successfully
+    Then Johngo is logged in successfully

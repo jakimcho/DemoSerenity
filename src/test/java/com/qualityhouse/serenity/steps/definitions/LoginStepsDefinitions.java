@@ -66,7 +66,7 @@ public class LoginStepsDefinitions
         loginPage.clickLoginButton();
     }
 
-    @Then( "^(.*) logs in is successfully$" )
+    @Then( "^(.*) is logged in successfully$" )
     public void userShouldLoginSuccessfully( String userName)
     {
         Assert.assertTrue( homePage.isSignOutMenuDisplayed() );
