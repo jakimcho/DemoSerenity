@@ -11,8 +11,8 @@ Feature: Account Registration
       | title | firstName | lastName | password    | dataOfBirth      |
       | Mr.   | John      | Snow     | password123 | 28-February-1985 |
     And he enters his address details:
-      | company  | address | city  | state  | zip   | country       | mobilePhone | addressAlias |
-      | The Wall | gate 13 | South | Alaska | 14253 | United States | 42342342343 | TheWall      |
+      | address | city  | state  | zip   | country       | mobilePhone | addressAlias |
+      | gate 13 | South | Alaska | 14253 | United States | 42342342343 | TheWall      |
     And he submits his registration details
     Then the registration is successful
     And John is logged in successfully

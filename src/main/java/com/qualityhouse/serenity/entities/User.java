@@ -83,4 +83,18 @@ public class User
     {
         this.dataOfBirth = dataOfBirth;
     }
+
+    @Override
+    public String toString()
+    {
+        return "{" +
+               "username='" + username + '\'' +
+               ", password='" + password + '\'' +
+               ", email='" + email + '\'' +
+               ", title='" + title + '\'' +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", dataOfBirth='" + dataOfBirth + '\'' +
+               '}';
+    }
 }

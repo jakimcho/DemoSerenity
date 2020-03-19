@@ -1,16 +1,9 @@
 package com.qualityhouse.serenity.page_objects;
 
-import com.qualityhouse.serenity.entities.User;
-import com.qualityhouse.serenity.utils.MonthsEnum;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.qualityhouse.serenity.utils.Months.getMonths;
 
 /**
  * @author yakimfb
@@ -20,82 +13,45 @@ public class RegistrationPage
         extends PageObject
 {
     @FindBy( id = "id_gender1" )
-    private WebElementFacade mrRadioButton;
+    public WebElementFacade mrRadioButton;
 
     @FindBy( id = "id_gender2" )
-    private WebElementFacade mrsRadioButton;
+    public WebElementFacade mrsRadioButton;
 
     @FindBy( name = "customer_firstname" )
-    private WebElementFacade firstNameField;
+    public WebElementFacade firstNameField;
 
     @FindBy( name = "customer_lastname" )
-    private WebElementFacade lastNameField;
+    public WebElementFacade lastNameField;
 
     @FindBy( name = "email" )
-    private WebElementFacade emailField;
+    public WebElementFacade emailField;
 
     @FindBy( name = "passwd" )
-    private WebElementFacade passwordField;
+    public WebElementFacade passwordField;
 
-    private static final By DAY_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "days" );
+    public static final By DAY_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "days" );
 
-    private static final By MONTH_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "months" );
+    public static final By MONTH_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "months" );
 
-    private static final By YEAR_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "years" );
+    public static final By YEAR_OF_BIRTH_DROP_DOWN_LOCATOR = By.name( "years" );
 
-    public void enterUserPersonalDetails( User user )
-    {
-        selectGender( user.getTitle() );
+    @FindBy( name = "address1" )
+    public WebElementFacade address1Field;
 
-        fillFiledWithData( firstNameField,
-                           user.getFirstName() );
-        fillFiledWithData( lastNameField,
-                           user.getLastName() );
-        fillFiledWithData( emailField,
-                           user.getEmail() );
-        fillFiledWithData( passwordField,
-                           user.getPassword() );
+    @FindBy( name = "city" )
+    public WebElementFacade addressCityField;
 
-        enterBirthDate( user.getDataOfBirth() );
-    }
+    public static final By ADDRESS_STATE_DROP_DOWN_LOCATOR = By.name( "id_state" );
 
-    private void selectGender( String gender )
-    {
-        if ( gender != null )
-        {
-            if ( gender.toLowerCase()
-                       .contains( "mrs" ) )
-            {
-                mrsRadioButton.click();
-            } else
-            {
-                mrRadioButton.click();
-            }
-        }
-    }
+    @FindBy( name = "postcode" )
+    public WebElementFacade addressZipCodeField;
 
-    private void fillFiledWithData( WebElementFacade fieldElement,
-                                    String data )
-    {
-        if ( data != null )
-        {
-            fieldElement.waitUntilEnabled()
-                        .type( data );
-        }
-    }
+    public static final By ADDRESS_COUNTRY_DROP_DOWN_LOCATOR = By.name( "id_country" );
 
-    private void enterBirthDate( String dataOfBirth )
-    {
-        if ( dataOfBirth != null )
-        {
-            String[] tokenizedDateOfBirth = dataOfBirth
-                    .split( "-" );
-            String monthValue = MonthsEnum.valueOf( tokenizedDateOfBirth[1].toUpperCase() )
-                                          .getValue();
-            find( DAY_OF_BIRTH_DROP_DOWN_LOCATOR ).selectByValue( tokenizedDateOfBirth[0] );
-            find( MONTH_OF_BIRTH_DROP_DOWN_LOCATOR ).selectByValue( monthValue );
-            find( YEAR_OF_BIRTH_DROP_DOWN_LOCATOR ).selectByValue( tokenizedDateOfBirth[2] );
-        }
-    }
+    @FindBy( name = "phone_mobile" )
+    public WebElementFacade addressMobilePhoneField;
 
+    @FindBy( name = "alias" )
+    public WebElementFacade addressAliasField;
 }
