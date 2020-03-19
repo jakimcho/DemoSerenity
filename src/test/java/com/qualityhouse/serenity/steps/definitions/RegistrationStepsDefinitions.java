@@ -4,11 +4,16 @@ import com.qualityhouse.serenity.entities.AddressDetails;
 import com.qualityhouse.serenity.entities.User;
 import com.qualityhouse.serenity.page_objects.LoginPage;
 import com.qualityhouse.serenity.steps.libraries.RegistrationActions;
+import cucumber.api.Transpose;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
 import java.util.List;
+import java.util.Map;
+
+import static com.qualityhouse.serenity.utils.Randomiser.randomizeValue;
+import static com.qualityhouse.serenity.utils.TestObjectFactory.prepareTestObjectFrom;
 
 /**
  * @author yakimfb
@@ -24,13 +29,15 @@ public class RegistrationStepsDefinitions
     @Given( "^(?:.*) has started an account registration with \"(.*)\" email$" )
     public void registrationProcessIsStarted( String email )
     {
-        mitko.startsRegistrationWithEmail( email );
+        mitko.startsRegistrationWithEmail( randomizeValue( email ) );
     }
 
     @When( "^(?:.*) enters his personal details:$" )
-    public void userEntersPersonalDetailsInRegistrationForm( List<User> rawUserData )
+    public void userEntersPersonalDetailsInRegistrationForm( @Transpose Map<String, String> rawUserData )
     {
-        User user = rawUserData.get( 0 );
+        User user = prepareTestObjectFrom( User.class,
+                                           rawUserData );
+        randomizeValue( user.getEmail() );
         mitko.entersHisPersonalDetails( user );
     }
 

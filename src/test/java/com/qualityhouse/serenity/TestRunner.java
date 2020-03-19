@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 @RunWith( CucumberWithSerenity.class )
 @CucumberOptions( features = "features",
         glue = "com/qualityhouse/serenity/steps/definitions",
-        tags = {"@debug"} )
+        tags = {""} )
 public class TestRunner
 {
 }
