@@ -24,7 +24,7 @@ public class RegistrationStepsDefinitions
     @Given( "^(?:.*) has started an account registration with \"(.*)\" email$" )
     public void registrationProcessIsStarted( String email )
     {
-        loginPage.startRegistrationWithEmail( email );
+        mitko.startsRegistrationWithEmail( email );
     }
 
     @When( "^(?:.*) enters his personal details:$" )

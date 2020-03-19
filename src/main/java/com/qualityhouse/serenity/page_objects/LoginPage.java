@@ -4,7 +4,6 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
-import org.openqa.selenium.By;
 
 /**
  * @author yakimfb
@@ -16,45 +15,19 @@ public class LoginPage
         extends PageObject
 {
 
-    private static final By EMAIL_FIELD_LOCATOR = By.name( "email" );
-
     @FindBy( name = "email" )
-    private WebElementFacade emailField;
+    public WebElementFacade emailField;
 
     @FindBy( name = "passwd" )
-    private WebElementFacade passwordField;
+    public WebElementFacade passwordField;
 
     @FindBy( name = "SubmitLogin" )
-    private WebElementFacade loginButton;
+    public WebElementFacade loginButton;
 
     @FindBy( name = "email_create" )
-    private WebElementFacade registrationMailField;
+    public WebElementFacade registrationMailField;
 
     @FindBy( name = "SubmitCreate" )
-    private WebElementFacade createAnAccountButton;
+    public WebElementFacade createAnAccountButton;
 
-    public void enterUserName( String email )
-    {
-        emailField.waitUntilEnabled()
-                  .type( email );
-    }
-
-    public void enterPassword( String password )
-    {
-        passwordField.waitUntilEnabled()
-                     .type( password );
-    }
-
-    public void clickLoginButton()
-    {
-        loginButton.waitUntilClickable()
-                   .click();
-    }
-
-    public void startRegistrationWithEmail( String email )
-    {
-        registrationMailField.type( email );
-        createAnAccountButton.waitUntilClickable()
-                             .click();
-    }
 }

@@ -12,20 +12,8 @@ public class HomePage
         extends PageObject
 {
     @FindBy( css = "nav a.logout" )
-    private WebElementFacade logOutMenu;
+    public WebElementFacade logOutMenu;
 
     @FindBy( css = "nav a.account" )
-    private WebElementFacade userMenu;
-
-    public boolean isSignOutMenuDisplayed()
-    {
-        return logOutMenu.isDisplayed();
-    }
-
-    public String getLoggedInUserName()
-    {
-        return userMenu.getText()
-                       .trim()
-                       .toLowerCase();
-    }
+    public WebElementFacade userMenu;
 }

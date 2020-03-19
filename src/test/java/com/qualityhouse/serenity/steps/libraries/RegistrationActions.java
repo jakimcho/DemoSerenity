@@ -2,11 +2,12 @@ package com.qualityhouse.serenity.steps.libraries;
 
 import com.qualityhouse.serenity.entities.AddressDetails;
 import com.qualityhouse.serenity.entities.User;
+import com.qualityhouse.serenity.page_objects.LoginPage;
 import com.qualityhouse.serenity.page_objects.RegistrationPage;
 import com.qualityhouse.serenity.utils.MonthsEnum;
 import net.thucydides.core.annotations.Step;
 
-import static com.qualityhouse.serenity.page_objects.RegistrationPage.*;
+import static com.qualityhouse.serenity.page_objects.components.RegistrationFormComponent.*;
 
 /**
  * @author yakimfb
@@ -16,20 +17,21 @@ public class RegistrationActions
         extends BasesActions
 {
     private RegistrationPage registrationPage;
+    private LoginPage loginPage;
 
     @Step( "Enters his/her personal details in the registration form {0}" )
     public void entersHisPersonalDetails( User user )
     {
         selectGender( user.getTitle() );
 
-        fillFieldWithData( registrationPage.firstNameField,
-                           user.getFirstName() );
-        fillFieldWithData( registrationPage.lastNameField,
-                           user.getLastName() );
-        fillFieldWithData( registrationPage.emailField,
-                           user.getEmail() );
-        fillFieldWithData( registrationPage.passwordField,
-                           user.getPassword() );
+        fillsFieldWithData( FIRST_NAME_FIELD,
+                            user.getFirstName() );
+        fillsFieldWithData( LAST_NAME_FIELD,
+                            user.getLastName() );
+        fillsFieldWithData( EMAIL_FIELD,
+                            user.getEmail() );
+        fillsFieldWithData( PASSWORD_FIELD,
+                            user.getPassword() );
 
         enterBirthDate( user.getDataOfBirth() );
     }
@@ -37,26 +39,34 @@ public class RegistrationActions
     @Step( "Enters his/her address details in the registration form {0}" )
     public void entersHisAddressDetails( AddressDetails addressDetails )
     {
-        fillFieldWithData( registrationPage.address1Field,
-                           addressDetails.getAddress() );
+        fillsFieldWithData( registrationPage.address1Field,
+                            addressDetails.getAddress() );
 
-        fillFieldWithData( registrationPage.addressCityField,
-                           addressDetails.getCity() );
+        fillsFieldWithData( registrationPage.addressCityField,
+                            addressDetails.getCity() );
 
-        selectFromDropDownAnItemByVisibleText( ADDRESS_STATE_DROP_DOWN_LOCATOR,
-                                               addressDetails.getState() );
+        selectsFromDropDownAnItemByVisibleText( ADDRESS_STATE_DROP_DOWN_LOCATOR,
+                                                addressDetails.getState() );
 
-        fillFieldWithData( registrationPage.addressZipCodeField,
-                           addressDetails.getZip() );
+        fillsFieldWithData( registrationPage.addressZipCodeField,
+                            addressDetails.getZip() );
 
-        selectFromDropDownAnItemByVisibleText( ADDRESS_COUNTRY_DROP_DOWN_LOCATOR,
-                                               addressDetails.getCountry() );
+        selectsFromDropDownAnItemByVisibleText( ADDRESS_COUNTRY_DROP_DOWN_LOCATOR,
+                                                addressDetails.getCountry() );
 
-        fillFieldWithData( registrationPage.addressMobilePhoneField,
-                           addressDetails.getMobilePhone() );
+        fillsFieldWithData( registrationPage.addressMobilePhoneField,
+                            addressDetails.getMobilePhone() );
 
-        fillFieldWithData( registrationPage.addressAliasField,
-                           addressDetails.getAddressAlias() );
+        fillsFieldWithData( registrationPage.addressAliasField,
+                            addressDetails.getAddressAlias() );
+    }
+
+    @Step
+    public void startsRegistrationWithEmail( String email )
+    {
+        fillsFieldWithData( loginPage.registrationMailField,
+                            email );
+        clicksOn( loginPage.createAnAccountButton );
     }
 
     private void selectGender( String gender )
@@ -85,12 +95,12 @@ public class RegistrationActions
                                           .getValue();
             String year = tokenizedDateOfBirth[2];
 
-            selectFromDropDownAnItemByValue( DAY_OF_BIRTH_DROP_DOWN_LOCATOR,
-                                             day );
-            selectFromDropDownAnItemByValue( MONTH_OF_BIRTH_DROP_DOWN_LOCATOR,
-                                             monthValue );
-            selectFromDropDownAnItemByValue( YEAR_OF_BIRTH_DROP_DOWN_LOCATOR,
-                                             year );
+            selectsFromDropDownAnItemByValue( DAY_OF_BIRTH_DROP_DOWN_LOCATOR,
+                                              day );
+            selectsFromDropDownAnItemByValue( MONTH_OF_BIRTH_DROP_DOWN_LOCATOR,
+                                              monthValue );
+            selectsFromDropDownAnItemByValue( YEAR_OF_BIRTH_DROP_DOWN_LOCATOR,
+                                              year );
         }
     }
 }
